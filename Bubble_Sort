@@ -1,0 +1,91 @@
+<?php
+
+function generateRange($start, $end, $step = 1) {
+    $range = [];
+    for ($i = $start; $i < $end; $i += $step) {
+        $range[] = $i;
+    }
+    return $range;
+}
+
+function generateRandomArray($size, $min, $max) {
+    $array = [];
+    for ($i = 0; $i < $size; $i++) {
+        $array[] = rand($min, $max);
+    }
+    return $array;
+}
+
+function bubble_sort(&$elements, $fn = 'comparison_function') {
+  for ($i = 0; $i < sizeof($elements) - 1; $i++) {
+    for ($j = sizeof($elements) - 1; $j >= ($i + 1); $j--) {
+      if ( $fn($elements[$j], $elements[$j-1]) ) {
+        // swap the element
+        $elements[$j]   ^= $elements[$j-1];
+        $elements[$j-1] ^= $elements[$j];
+        $elements[$j]   ^= $elements[$j-1];
+      }
+    }
+  }
+}
+
+ function comparison_function(&$theList, &$b) {
+   return $theList < $b;
+ }
+
+// Melhor caso
+$melhor_1000 = generateRange(0, 1000);
+$start_time = microtime(true);
+$theList = $melhor_1000;
+bubble_sort($melhor_1000);
+echo "Melhor caso 1000 " . (microtime(true) - $start_time) . "\n";
+
+$melhor_10000 = generateRange(0, 10000);
+$start_time = microtime(true);
+$theList = $melhor_10000;
+bubble_sort($melhor_10000);
+echo "Melhor caso 10000 " . (microtime(true) - $start_time) . "\n";
+
+$melhor_100000 = generateRange(0, 100000);
+$start_time = microtime(true);
+$theList = $melhor_100000;
+bubble_sort($melhor_100000);
+echo "Melhor caso 100000 " . (microtime(true) - $start_time) . "\n";
+
+// Caso médio
+$medio_1000 = generateRandomArray(1000, 0, 10);
+$start_time = microtime(true);
+$theList = $medio_1000;
+bubble_sort($medio_1000);
+echo "Caso Médio 1000 " . (microtime(true) - $start_time) . "\n";
+
+$medio_10000 = generateRandomArray(10000, 0, 10);
+$start_time = microtime(true);
+$theList = $medio_10000;
+bubble_sort($medio_10000);
+echo "Caso Médio 10000 " . (microtime(true) - $start_time) . "\n";
+
+$medio_100000 = generateRandomArray(100000, 0, 10);
+$start_time = microtime(true);
+$theList = $medio_100000;
+bubble_sort($medio_100000);
+echo "Caso Médio 100000 " . (microtime(true) - $start_time) . "\n";
+
+// Pior caso
+$pior_1000 = array_reverse(generateRange(1, 1001));
+$start_time = microtime(true);
+$theList = $pior_1000;
+bubble_sort($pior_1000);
+echo "Pior caso 1000 " . (microtime(true) - $start_time) . "\n";
+
+$pior_10000 = array_reverse(generateRange(1, 10001));
+$start_time = microtime(true);
+$theList = $pior_10000;
+bubble_sort($pior_10000);
+echo "Pior caso 10000 " . (microtime(true) - $start_time) . "\n";
+
+$pior_100000 = array_reverse(generateRange(1, 100001));
+$start_time = microtime(true);
+$theList = $pior_100000;
+bubble_sort($pior_100000);
+echo "Pior caso 100000 " . (microtime(true) - $start_time) . "\n";
